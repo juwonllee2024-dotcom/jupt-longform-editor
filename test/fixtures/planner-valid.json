@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "jobId": "video_plan_001",
+  "durationFrames": 300,
+  "fps": 30,
+  "segments": [
+    {
+      "id": "segment_001",
+      "startFrame": 0,
+      "endFrame": 300,
+      "spokenText": "안녕하세요",
+      "layout": "face-full",
+      "primaryAssetId": "facecam_main",
+      "sourceId": null,
+      "captionStyle": "hook",
+      "confidence": 1,
+      "reason": "opening"
+    }
+  ],
+  "warnings": []
+}

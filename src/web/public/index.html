@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1020">
+    <title>모두를 위한 AI · 장편 편집실</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="app-header">
+        <a class="brand" href="/" aria-label="모두를 위한 AI 장편 편집실">
+          <span class="brand-mark">AI</span>
+          <span><b>모두를 위한 AI</b><small>장편 편집실</small></span>
+        </a>
+        <div class="header-meta" aria-label="서비스 상태">
+          <span class="live-dot">로컬 전용</span>
+          <span>자동 게시 없음</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow">LONGFORM · CONDENSE</div>
+            <h1>긴 인터뷰를<br><span>핵심만 남겨요.</span></h1>
+            <p class="lede">20분에서 1시간짜리 YouTube 영상을 5–8분 검토본으로 줄입니다. 흐름과 원본 목소리는 그대로 둡니다.</p>
+          </div>
+          <div class="hero-steps" aria-label="편집 방식">
+            <div><b>01</b><span>링크 입력</span></div>
+            <div><b>02</b><span>핵심 선별</span></div>
+            <div><b>03</b><span>직접 검토</span></div>
+          </div>
+        </section>
+
+        <div class="workspace-grid">
+          <section class="card setup-card">
+            <div class="section-kicker">01 / SOURCE</div>
+            <h2>영상 하나로 시작</h2>
+            <p class="card-intro">YouTube 링크를 붙여 넣으면 편집 작업을 준비합니다.</p>
+            <form id="job-form">
+              <label class="field wide">
+                <span>YouTube URL</span>
+                <input id="youtube-url" name="youtubeUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off" required>
+              </label>
+              <div class="field-row">
+                <label class="field">
+                  <span>목표 길이</span>
+                  <select id="target-duration" name="targetDurationSec">
+                    <option value="300">5분</option>
+                    <option value="390" selected>6분 30초</option>
+                    <option value="420">7분</option>
+                    <option value="480">8분</option>
+                  </select>
+                </label>
+                <fieldset class="field caption-field">
+                  <legend>한국어 자막</legend>
+                  <label class="toggle-line" for="use-ollama">
+                    <input id="use-ollama" type="checkbox">
+                    <span>로컬 Ollama 사용</span>
+                  </label>
+                  <select id="ollama-model" aria-label="Ollama model" disabled>
+                    <option value="qwen3:8b" selected>qwen3:8b · 추천</option>
+                    <option value="qwen3:4b">qwen3:4b · 빠름</option>
+                    <option value="qwen3:14b">qwen3:14b · 고성능</option>
+                    <option value="gemma3:4b">gemma3:4b</option>
+                    <option value="llama3.2:3b">llama3.2:3b</option>
+                    <option value="custom">직접 입력</option>
+                  </select>
+                  <input id="custom-ollama-model" class="custom-model" type="text" placeholder="예: llama3.1:8b" aria-label="직접 입력한 Ollama model" disabled hidden>
+                </fieldset>
+              </div>
+              <fieldset class="field rights-field">
+                <legend>소스 사용 권리</legend>
+                <label class="toggle-line" for="personal-permission">
+                  <input id="personal-permission" type="checkbox">
+                  <span>개인 이메일로 사용 허가를 받은 영상</span>
+                </label>
+                <input id="permission-note" type="text" maxlength="500" placeholder="선택: 허가 메모 (이메일 원문·개인정보는 입력하지 마세요)" aria-label="개인 허가 메모" disabled>
+                <small class="field-help">선택하면 허가 상태를 작업 기록에 남겨. 원본 이메일은 업로드하지 않아. 경로 안전 검사는 계속 적용돼.</small>
+              </fieldset>
+              <button class="primary" type="submit" id="start-button"><span>편집 시작</span><span aria-hidden="true">↗</span></button>
+              <p class="form-error" id="form-error" role="alert"></p>
+            </form>
+          </section>
+
+          <aside class="card workflow-card">
+            <div class="section-kicker">02 / WORKFLOW</div>
+            <h2>이렇게 진행돼요</h2>
+            <ol class="workflow-list">
+              <li><b>01</b><span><strong>소스 확인</strong><small>링크와 자막을 준비해요</small></span></li>
+              <li><b>02</b><span><strong>핵심 선별</strong><small>문맥을 잃지 않게 줄여요</small></span></li>
+              <li><b>03</b><span><strong>렌더링</strong><small>검토용 MP4를 만들어요</small></span></li>
+              <li><b>04</b><span><strong>직접 검토</strong><small>승인 전까지 게시하지 않아요</small></span></li>
+            </ol>
+            <p class="privacy-note"><span aria-hidden="true">✓</span> 파일과 결과는 이 컴퓨터에서만 처리됩니다.</p>
+          </aside>
+        </section>
+
+        <section class="card queue-card" id="queue-panel" aria-labelledby="queue-title">
+          <div class="queue-heading">
+            <div>
+              <div class="section-kicker">03 / QUEUE</div>
+              <h2 id="queue-title">작업 대기열</h2>
+            </div>
+            <span class="queue-count" id="queue-count">0개</span>
+          </div>
+          <p class="queue-empty muted" id="queue-empty">아직 등록된 작업이 없어.</p>
+          <ol class="queue-list" id="queue-list" aria-live="polite"></ol>
+        </section>
+
+        <section class="card job-card" id="job-panel" hidden>
+          <div class="section-kicker">02 / MISSION CONTROL</div>
+          <div class="job-heading">
+            <div><h2 id="job-title">작업 진행 중</h2><p id="job-id" class="muted"></p></div>
+            <span id="job-state" class="state-pill">QUEUED</span>
+          </div>
+          <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+          <ol class="stages" id="stages">
+            <li data-state="validating"><span>01</span><b>소스 확인</b><em>대기</em></li>
+            <li data-state="transcribing"><span>02</span><b>영어 자막</b><em>대기</em></li>
+            <li data-state="planning"><span>03</span><b>핵심 구간 선별</b><em>대기</em></li>
+            <li data-state="matching"><span>04</span><b>자료 연결 확인</b><em>대기</em></li>
+            <li data-state="rendering"><span>05</span><b>영상 렌더링</b><em>대기</em></li>
+            <li data-state="checking"><span>06</span><b>품질 확인</b><em>대기</em></li>
+          </ol>
+          <div class="job-message" id="job-message">작업을 준비하는 중…</div>
+          <div class="blocked-reason" id="blocked-reason" hidden>
+            <strong>차단 사유</strong>
+            <span id="blocked-reason-text"></span>
+          </div>
+          <div class="preview-wrap" id="preview-wrap" hidden>
+            <div class="preview-label">REVIEW PREVIEW</div>
+            <video id="preview" controls playsinline preload="metadata"></video>
+            <div class="hash-row"><span>SHA-256</span><code id="output-hash">—</code></div>
+            <button class="approve" id="approve-button" type="button" disabled>검토 완료 · 승인 기록</button>
+            <p class="muted small">승인 버튼은 로컬 상태만 기록한다. 게시하지 않는다.</p>
+          </div>
+          <pre class="log" id="job-log" aria-live="polite"></pre>
+        </section>
+      </main>
+      <footer><span>모두를 위한 AI</span><span>LOCAL REVIEW ONLY</span></footer>
+    </div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

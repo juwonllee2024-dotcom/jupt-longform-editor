@@ -1,0 +1,23 @@
+{
+  "name": "juwon-video-editor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "test:all": "node --test test/*.test.mjs",
+    "editor": "node src/cli.mjs",
+    "server": "node src/web/start.mjs"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.498",
+    "@remotion/renderer": "4.0.498",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "remotion": "4.0.498",
+    "zod": "4.4.3"
+  }
+}
