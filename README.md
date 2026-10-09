@@ -1,3 +1,37 @@
+<!-- JUWON-PORTFOLIO-INTRO:START -->
+# 모두를 위한 AI 장편 편집실
+
+![모두를 위한 AI 장편 편집실 — portfolio visual](docs/portfolio-preview.jpg)
+
+*Recorded local editor start screen. Download, translation, and rendering jobs were not exercised for this capture.*
+
+*로컬 장편 편집실 시작 화면 · 다운로드·번역·렌더 작업은 실행하지 않음*
+
+## English
+
+A local long-form editing prototype intended to condense English interviews and videos into coherent 5–8 minute edits, with queue visibility, model selection, and permission notes.
+
+[View JUWON's portfolio](https://jupt.pages.dev/) · [Browse the project collection](https://jupt.pages.dev/projects)
+
+**Scope:** This README presents the repository's documented intent and recorded visual evidence. It does not certify that every feature is complete, deployed, or currently working. Follow the original setup, safety, and license documentation below.
+
+This repository is a selected original-source snapshot. The recorded source fingerprint describes the initial publication; this portfolio introduction was added afterward. Original technical documentation is preserved below.
+
+## 한국어
+
+영어 장편을 5~8분으로 줄이는 편집실. 대기열·모델 선택·개인 허가 메모를 포함합니다.
+
+[JUWON 포트폴리오 보기](https://jupt.pages.dev/) · [전체 프로젝트 보기](https://jupt.pages.dev/projects)
+
+**확인 범위:** 저장소의 문서상 목적과 기록된 화면 근거를 소개합니다. 모든 기능의 완성·배포·현재 정상 작동을 보증하지 않습니다. 설치법·안전 주의사항·라이선스는 아래 기존 문서를 확인하세요.
+
+선택된 원본 소스의 공개 스냅샷입니다. 기록된 소스 지문은 최초 공개 시점을 나타내며, 이 포트폴리오 소개는 이후 추가했습니다. 기존 기술 문서는 아래에 보존했습니다.
+<!-- JUWON-PORTFOLIO-INTRO:END -->
+
+---
+
+## Original documentation / 기존 문서
+
 # Juwon AI Video Editor
 
 승인된 대본, 직접 촬영한 얼굴 영상, 화면 녹화, 출처가 연결된 이미지로 검토용 영상을 만든다. YouTube 업로드 기능은 없다. `approved`도 로컬 승인 기록일 뿐 게시를 뜻하지 않는다.
